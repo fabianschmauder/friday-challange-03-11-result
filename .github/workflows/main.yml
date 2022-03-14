@@ -13,10 +13,11 @@ jobs:
       - name: zip code
         run: |
           sh zip-code.sh
+          zip artifact.zip app-code.zip
       - uses: actions/upload-artifact@v3
         with:
           name: app-code
-          path: app-code.zip
+          path: artifact.zip
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -24,7 +25,6 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: app-code
-          path: app-code.zip
       - name: upload to s3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
