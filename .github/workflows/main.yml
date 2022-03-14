@@ -33,4 +33,5 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           CODE_BUCKET_NAME: ${{ secrets.CODE_BUCKET_NAME }}
         run: |
+          ls -l
           aws s3 cp app-code.zip s3://$CODE_BUCKET_NAME/app-code.zip
