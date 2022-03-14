@@ -36,4 +36,5 @@ jobs:
         run: |
           ls -l
           cd artifact
+          ls -l
           aws s3 cp app-code.zip s3://$CODE_BUCKET_NAME/app-code.zip
