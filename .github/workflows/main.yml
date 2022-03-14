@@ -1,0 +1,19 @@
+name: Build api code
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: zip code
+        run: |
+          sh zip-code.sh
+      - uses: actions/upload-artifact@v3
+        with:
+          name: app-code
+          path: app-code.zip
