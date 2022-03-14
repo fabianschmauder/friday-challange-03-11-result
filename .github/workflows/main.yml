@@ -21,11 +21,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - uses: actions/download-artifact@v3
         with:
           name: app-code
           path: app-code.zip
       - name: upload to s3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          CODE_BUCKET_NAME: ${{ secrets.CODE_BUCKET_NAME }}
         run: |
-          ls -l
+          aws s3 cp app-code.zip s3://$CODE_BUCKET_NAME/app-code.zip
