@@ -17,3 +17,13 @@ jobs:
         with:
           name: app-code
           path: app-code.zip
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v3
+        with:
+          name: app-code
+      - name: upload to s3
+        run: |
+          ls
