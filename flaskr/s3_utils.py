@@ -9,6 +9,6 @@ def list_objects(bucketname):
 
 def count_words_in_object(bucketname, key):
     response = client.get_object(Bucket = bucketname, Key = key)
-    object_content =  response["Body"].read()
+    object_content = response["Body"].read()
     split = object_content.split()
     return len(split)
